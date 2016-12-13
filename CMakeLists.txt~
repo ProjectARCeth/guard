@@ -19,7 +19,6 @@ src/guard.cpp
 )
 
 add_executable(guard_node src/guard_node.cpp)
-add_executable(gridAnalyser_node src/gridAnalyser_node.cpp)
 target_link_libraries(guard_node ${catkin_LIBRARIES} ${PROJECT_NAME})
 
 cs_install()
