@@ -1,10 +1,10 @@
-#include "ros/ros.h"
-#include "gridAnalyser.hpp"
+#include "../include/gridAnalyser/gridAnalyser.hpp"
 int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "gridAnalyser");
-	ros::Nodehandle node;
+	ros::NodeHandle node;
 	gridAnalyser gridAnalyser_object(node);
+	gridAnalyser_object.readPathFromTxt("pathRov_openLoop2.txt");
 	ros::spin();
 	return 0;
 }
