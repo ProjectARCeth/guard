@@ -2,6 +2,7 @@
 #include "ros/ros.h"
 #include "std_msgs/Float64MultiArray.h"
 #include "std_msgs/Float64.h"
+#include"ackermann_msgs/AckermannDrive.h"
 class guard
 {
 public:
@@ -12,23 +13,24 @@ public:
 	//Save the incoming current state.
 	void getStopBool (const arc_msgs::State::ConstPtr& arc_state);
 	//Save the incoming incoming steering angle and the velocity.
-	void getCommand (const std_msgs::Float64MultiArray::ConstPtr& save_com);
-
+	void getCommand (const ackermann_msgs::AckermannDrive::ConstPtr& save_com);
 private:
 	//NodeHandle.
 	ros::NodeHandle nh_;
 	//Publishers::.
 	//Pullisher for the save steering angle and the velocity.
-	ros::Publisher safeState_pub;
+	ros::Publisher safeState_pub_;
 	//Subscriber:.
 	//Subscriber to the state.
-	ros::Subscriber state_sub;
+	ros::Subscriber state_sub_;
 	//Subscriber to the stellgroessen.
-	ros::Subscriber stellgroessen_sub;
+	ros::Subscriber stellgroessen_sub_;
 	//Transfer varible.
-	std_msgs::Float64MultiArray trans_stellgroessen;
+	ackermann_msgs::AckermannDrive trans_stellgroessen_;
 	//Status variable. 
 	bool status_;
+	//Safe steering_angle. 
+	float keep_steering_angle_;
 };
 
 	

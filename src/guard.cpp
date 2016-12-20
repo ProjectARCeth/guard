@@ -1,4 +1,4 @@
-#include "guard.hpp"
+#include "../include/guard/guard.hpp"
 //Konstruktor.
 guard::guard(const ros::NodeHandle &nh, bool status) : nh_(nh)
 {

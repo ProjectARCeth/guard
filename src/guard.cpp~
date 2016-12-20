@@ -18,11 +18,13 @@ void guard::getCommand (const ackermann_msgs::AckermannDrive::ConstPtr& save_com
 {	if(status_)
 	{
 		trans_stellgroessen_.steering_angle=save_com->steering_angle;
+		//Keep the steering angle if systems fails.
 		keep_steering_angle_=save_com->steering_angle;
 		trans_stellgroessen_.speed=save_com->speed;
 	}
 	else
 	{
+		//If Systems fails brake and keep steering angle. 
 		trans_stellgroessen_.steering_angle=keep_steering_angle_;
 		trans_stellgroessen_.speed=0;
 	}
