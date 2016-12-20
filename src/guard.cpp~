@@ -1,44 +1,35 @@
 #include "guard.hpp"
-
 //Konstruktor.
-
 guard::guard(const ros::NodeHandle &nh, bool status) : nh_(nh)
 {
 	//Transfer status. 
 	status_=status;
 	//Publishers.
-	safeState_pub=nh_.advertise<std_msgs::Float64MultiArray>("/stellgroessen_safe", 1000);
-
+	safeState_pub_=nh_.advertise<ackermann_msgs::AckermannDrive>("/stellgroessen_safe", 1000);
 	//Subscriber.
-	state_sub=nh_.subscribe("/state", 100, &guard::getStopBool, this);
-	stellgroessen_sub=nh_.subscribe("/stellgroessen", 100, &guard::getCommand, this);
+	state_sub_=nh_.subscribe("/state", 100, &guard::getStopBool, this);
+	stellgroessen_sub_=nh_.subscribe("/stellgroessen", 100, &guard::getCommand, this);
 }
-
 //Standart Destruktor.
 guard::~guard() {}
-
 //Member methods.
-
 //Callback function which processes the incoming stellgroessen.
-void guard::getCommand (const std_msgs::Float64MultiArray::ConstPtr& save_com)
+void guard::getCommand (const ackermann_msgs::AckermannDrive::ConstPtr& save_com)
 {	if(status_)
 	{
-		trans_stellgroessen.data[0]=save_com->data[0];
-		trans_stellgroessen.data[1]=save_com->data[1];
+		trans_stellgroessen_.steering_angle=save_com->steering_angle;
+		keep_steering_angle_=save_com->steering_angle;
+		trans_stellgroessen_.speed=save_com->speed;
 	}
 	else
 	{
-		trans_stellgroessen.data[0]=0;
-		trans_stellgroessen.data[1]=0;
+		trans_stellgroessen_.steering_angle=keep_steering_angle_;
+		trans_stellgroessen_.speed=0;
 	}
-	safeState_pub.publish(trans_stellgroessen);
+	safeState_pub_.publish(trans_stellgroessen_);
 }
-
 void guard::getStopBool(const arc_msgs::State::ConstPtr& arc_state)
 {
 	status_=arc_state->stop;
 }
-
-
-	
 

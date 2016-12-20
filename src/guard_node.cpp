@@ -1,4 +1,3 @@
-#include "ros/ros.h"
 #include "guard.hpp"
 bool status=1;
 int main(int argc, char **argv)
