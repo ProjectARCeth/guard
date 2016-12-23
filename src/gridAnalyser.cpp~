@@ -102,7 +102,6 @@ void gridAnalyser::createSafeMap (const nav_msgs::OccupancyGrid::ConstPtr& grid_
 		{
 			if(grid_map->data[calculateIndex(i,j)]!=0)
 			{
-				//Inflate if the the cell isn't empty.
 				inflate(i,j);
 			}
 		}
@@ -115,25 +114,21 @@ int gridAnalyser::calculateIndex(int x, int y)
 	std::cout<<n<<std::endl; //Only for testing.
 	return n;
 }
-//Function which inflates around (x, y).
 void gridAnalyser::inflate(int x, int y)
 {
 	float Radius_float=(erod_width_*FoS_)/resolution_;
 	float R=Radius_float;
 	if((Radius_float-R)>0.5)
 	{	
-		//if-condition for the correct rounding. 
 		R=R+1;
 	}
 	for(int i=(x-R); i<(x+R+1); i++)
 	{
 		for(int j=(y-R); j<(y+R+1); j++)
-		{	
-			//calculates dinstance squared between (i, j) and (x, y).
+		{
 			float d=(((x-i)*(x-i))+((y-j)*(y-j)));
 			if((i>0) && (i<(width_+1)) && (j>0) && (j<height_+1) && (d<(R*R)))
 			{
-				//If (i, j) is on the map and the distance to (x,y) is smaller than the defined.
 				grid_safe_.data[calculateIndex(i, j)]=100;
 			}
 		}
