@@ -16,9 +16,10 @@ catkin_simple(ALL_DEPS_REQUIRED)
 
 cs_add_library(${PROJECT_NAME}
 src/guard.cpp
+)
+cs_add_library(${PROJECT_NAME}
 src/gridAnalyser.cpp
 )
-
 
 add_executable(guard_node src/guard_node.cpp)
 add_executable(gridAnalyser_node src/gridAnalyser_node.cpp)
