@@ -21,9 +21,9 @@ src/gridAnalyser.cpp
 )
 
 
-add_executable(guard_node src/guard_node.cpp)
-add_executable(gridAnalyser_node src/gridAnalyser_node.cpp)
-target_link_libraries(guard_node ${catkin_LIBRARIES} ${PROJECT_NAME})
-target_link_libraries(gridAnalyser_node ${catkin_LIBRARIES} ${PROJECT_NAME})
+add_executable(high_level_guard src/guard_node.cpp)
+add_executable(grid_analyser src/gridAnalyser_node.cpp)
+target_link_libraries(high_level_guard ${catkin_LIBRARIES} ${PROJECT_NAME})
+target_link_libraries(grid_analyser ${catkin_LIBRARIES} ${PROJECT_NAME})
 cs_install()
 cs_export()

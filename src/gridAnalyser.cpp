@@ -247,7 +247,7 @@ void gridAnalyser::whattodo(const int i)
 {	
 	int* p=convertIndex(i);
 	float d=sqrt(pow(p[0]-width_/2,2)+pow(p[1]-height_/2,2))*resolution_;	//Objektdistanz bezüglich gridMittelpunkt	
-	float v_abs=sqrt(pow(state_.pose_diff.twist.linear.x,2)+pow(state_.pose_diff.twist.linear.x,2));
+	float v_abs=sqrt(pow(state_.pose_diff.twist.linear.x,2)+pow(state_.pose_diff.twist.linear.y,2));
 	obstacle_distance_=d;
 
 	float crit_obs_dist=pow(v_abs*3.6,2)/2*FoS_break_distance;	//Bremsweg mit Sicherheitsfaktor (FoS_break_distance) Gleichung aus internet
@@ -256,10 +256,9 @@ void gridAnalyser::whattodo(const int i)
 			std::cout<<"NOTSTOPP! Hindernis in Bremsweg"<<std::endl;
 		}
 		else
-		{	stop_=0;
+		{	
+			stop_=0;
 			std::cout<<"LANGSAMER! Doch noch nicht Not"<<std::endl;
-
-				
 		}
 }
 

@@ -1,7 +1,7 @@
 #include "../include/gridAnalyser/gridAnalyser.hpp"
 int main(int argc, char **argv)
 {	
-	ros::init(argc, argv, "gridAnalyser");
+	ros::init(argc, argv, "grid_analyser");
 	ros::NodeHandle node;
 	gridAnalyser gridAnalyser_object(node);
 	//gridAnalyser_object.readPathFromTxt("/home/moritz/.ros/Paths/pathRov.txt"); //Only for testing. 
