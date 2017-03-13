@@ -32,6 +32,8 @@ public:
 	void inflate(int n);
 	//Funktion that projects a global point in the local system (grid index)
 	int gridIndexOfGlobalPoint(geometry_msgs::Point P);
+	//globalpoint to local point
+	geometry_msgs::Point GlobalToLocal(geometry_msgs::Point global);
 	//Function that calculates grid coordinates from index
 	int* convertIndex(const int i);
 	//Comparison of NicoMap and dangerzone
@@ -40,11 +42,15 @@ public:
 	void whattodo(const int i);
 	//Publishes all 
 	void publish_all();
+	//generates 2dimeensional state from posirion and orientation
+	//	arc_msgs::State generate2DState(const float x, const float y, const float alpha );
 	
 private:
 	//Ros-Constants:.
 	//NodeHandle.
 	ros::NodeHandle nh_;
+//Path publisher
+ros::Publisher path_pub_;
 	//Publisher for the boolean.
 	ros::Publisher stop_pub_;
 	//publisher for the danger grid.
