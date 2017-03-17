@@ -21,7 +21,7 @@ guard::guard(const ros::NodeHandle &nh) : nh_(nh)
 	state_sub_=nh_.subscribe(STATE_TOPICNAME, QUEUE_LENGTH, &guard::getState, this);
 	stellgroessen_sub_=nh_.subscribe(STELLGROESSEN_TOPICNAME, QUEUE_LENGTH, &guard::getCommand, this);
 	grid_stop_sub_=nh_.subscribe(LASER_STOP_TOPICNAME, QUEUE_LENGTH, &guard::getLaserStop, this);
-	vcu_stop_sub_=nh_.subscribe(STOP_NI_TOPICNAME, QUEUE_LENGTH, &guard::getVcuStop, this);
+	vcu_stop_sub_=nh_.subscribe("/vcu_stop",100, &guard::getVcuStop, this);
 }
 
 void guard::getState(const arc_msgs::State::ConstPtr& arc_state)

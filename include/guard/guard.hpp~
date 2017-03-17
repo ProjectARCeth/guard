@@ -41,7 +41,7 @@ private:
 	std::string STATE_TOPICNAME;
 	std::string STELLGROESSEN_TOPICNAME;
 	std::string LASER_STOP_TOPICNAME;
-	std::string STOP_NI_TOPICNAME;
+	std::string STOP_NI_TOPICNAME
 	int QUEUE_LENGTH;
 };
 
