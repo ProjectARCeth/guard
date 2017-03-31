@@ -50,12 +50,14 @@ void guard::chooseAndPublish(){
 		std::cout<<"!!!!!!!!!!NOTSTOP!!!!!!!!!!!!!!!"<<std::endl;
 		std_msgs::Bool notstop_msg;
 		notstop_msg.data = not_stop_;
-		ros::Rate looprate(1000);
-		while(ros::ok()){
+		ros::Rate looprate(10);
+		// while(ros::ok()){
+		for(int i=0;i<15;++i){
 			not_stop_pub_.publish(notstop_msg);
 			safe_command_pub_.publish(guard_stellgroessen_);
 			looprate.sleep();
 		}
+		// not_stop_pub_.publish(notstop_msg);
 	}
 }
 
