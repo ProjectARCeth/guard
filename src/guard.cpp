@@ -68,22 +68,26 @@ void guard::getCommand (const ackermann_msgs::AckermannDrive::ConstPtr& msg){
 
 void guard::getGuiStop(const std_msgs::Bool::ConstPtr& msg){
 	gui_stop_ = msg->data;
+	if(gui_stop_) std::cout << "NOTSTOP: GUI wants to stop !" << std::endl;
 	chooseAndPublish();
 }
 
 void guard::getLaserStop(const std_msgs::Bool::ConstPtr& msg){
 	laser_stop_=msg->data;
+	if(laser_stop_) std::cout << "NOTSTOP: Laser wants to stop !" << std::endl;
 	chooseAndPublish();
 }
 
 void guard::getState(const arc_msgs::State::ConstPtr& arc_state){	
 	state_stop_=arc_state->stop;
+	if(state_stop_) std::cout << "NOTSTOP: State estimation wants to stop !" << std::endl;
 	chooseAndPublish();
 }
 
 void guard::getVcuStop(const std_msgs::Float64::ConstPtr& msg){
 	if(msg->data == 99) vcu_stop_ = true;
 	else vcu_stop_ = false;
+	if(vcu_stop_) std::cout << "NOTSTOP: VCU wants to stop !" << std::endl;
 	chooseAndPublish();
 }
 
